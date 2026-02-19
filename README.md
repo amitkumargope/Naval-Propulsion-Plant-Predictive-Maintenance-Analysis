@@ -199,12 +199,15 @@ Coraddu, A., Oneto, L., Ghio, A., Savio, S., Anguita, D., & Figari, M. (2014).
 Condition Based Maintenance of Naval Propulsion Plants [Dataset].
 UCI Machine Learning Repository.
 
-
+```
 ## Author
+
+```
 Amit Kumar Gope
 AI Research Scientist
 Vesuvius Group SA
 Ghilin Mons Belgium
 https://doi.org/10.24432/C5K31K
 ```
+
 
