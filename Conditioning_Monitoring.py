@@ -435,6 +435,7 @@ print("\n✅ Regression models trained.")
 # =============================================================================
 # Regression — Residual Plots & Performance Decay Visualization
 # =============================================================================
+
 best_reg_name = max(reg_results_kMc, key=lambda k: reg_results_kMc[k]["R2_test"])
 print(f"🏆 Best regression model (kMc): {best_reg_name}")
 
@@ -492,6 +493,7 @@ print("✅ Regression evaluation plots saved.")
 # =============================================================================
 # MODEL 2 — Damage/Failure Prediction (Classification)
 # =============================================================================
+
 # Handle class imbalance with SMOTE
 print("Applying SMOTE for class balancing...")
 smote = SMOTE(random_state=CONFIG["random_state"])
@@ -549,6 +551,7 @@ print("\n✅ Classification models trained.")
 # =============================================================================
 # Classification — Confusion Matrices & ROC Curves
 # =============================================================================
+
 fig, axes = plt.subplots(2, len(clf_models), figsize=(6 * len(clf_models), 12))
 
 for col_idx, (name, mdl) in enumerate(trained_clf.items()):
@@ -589,6 +592,7 @@ print(df_clf[["Accuracy_test", "Precision_test", "Recall_test", "F1_test", "ROC_
 # MODEL 3 — Operating Conditions Impact Analysis (SHAP)
 # =============================================================================
 # Use best XGBoost regression model for kMc as explainer
+
 best_xgb_reg = trained_reg_kMc["XGBoost"]
 
 print("Computing SHAP values (XGBoost → kMc)… this may take a moment…")
@@ -632,6 +636,7 @@ print("✅ SHAP analysis complete.")
 # =============================================================================
 # Permutation Importance & Partial Dependence Plots
 # =============================================================================
+
 from sklearn.inspection import permutation_importance, PartialDependenceDisplay
 
 # --- Permutation Importance (Random Forest Regressor, kMc) ---
@@ -674,6 +679,7 @@ print("✅ Permutation importance & PDP saved.")
 # =============================================================================
 # Cross-Validation — Comprehensive Evaluation
 # =============================================================================
+
 cv = KFold(n_splits=CONFIG["cv_folds"], shuffle=True, random_state=CONFIG["random_state"])
 skcv = StratifiedKFold(n_splits=CONFIG["cv_folds"], shuffle=True,
                         random_state=CONFIG["random_state"])
@@ -724,6 +730,7 @@ print(df_cv_clf)
 # =============================================================================
 # Maintenance Threshold Alerts System
 # =============================================================================
+
 MAINTENANCE_THRESHOLDS = {
     # Decay coefficients
     "kMc_critical":   0.96,   # Immediate maintenance
@@ -817,6 +824,7 @@ for a in demo["alerts"]:
 # Cost-Benefit Analysis Framework
 # =============================================================================
 # Cost parameters (illustrative — adjust to real values)
+
 COSTS = {
     "preventive_maintenance":    50_000,   # USD — planned maintenance
     "corrective_maintenance":   200_000,   # USD — emergency repair
@@ -893,6 +901,7 @@ plt.show()
 # =============================================================================
 # Simulate a performance decay timeline for illustration
 # (In practice, replace with actual sequential sensor readings)
+
 np.random.seed(0)
 n_steps = 200
 time_days = np.linspace(0, 730, n_steps)  # 2-year operational period
@@ -948,6 +957,7 @@ print("✅ Dashboard saved as HTML.")
 # Operating Conditions Impact — Critical Range Heatmap
 # =============================================================================
 # Grid search over ship speed (v) and lever position (lp)
+
 v_range  = np.linspace(3, 27, 25)
 lp_range = np.linspace(1, 9, 25)
 VV, LP   = np.meshgrid(v_range, lp_range)
@@ -999,6 +1009,7 @@ print("✅ Operating condition impact map saved.")
 # =============================================================================
 # Comprehensive Model Performance Report
 # =============================================================================
+
 print("=" * 70)
 print("       COMPREHENSIVE MODEL PERFORMANCE REPORT")
 print("=" * 70)
@@ -1042,6 +1053,7 @@ print("\n✅ Full performance report complete.")
 # =============================================================================
 # Feature Importance Consolidated Visualization
 # =============================================================================
+
 # Gather RF feature importances for both regression models
 rf_kMc_imp = pd.Series(trained_reg_kMc["Random Forest"].feature_importances_,
                         index=feature_names).sort_values(ascending=False)
@@ -1099,6 +1111,7 @@ print("✅ Feature importance visualizations saved.")
 # =============================================================================
 # Maintenance Recommendations Summary
 # =============================================================================
+
 print("=" * 70)
 print("   NAVAL PROPULSION PLANT — MAINTENANCE RECOMMENDATIONS")
 print("=" * 70)
